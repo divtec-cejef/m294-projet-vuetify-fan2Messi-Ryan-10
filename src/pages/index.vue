@@ -1,3 +1,4 @@
+import TeamCard from '@/components/TeamCard.vue'
 <template>
   <v-container>
     <!-- Champ de recherche -->
@@ -29,11 +30,7 @@
         md="4"
         sm="6"
       >
-        <v-card>
-          <v-img height="150" :src="team.strTeamBadge" />
-          <v-card-title>{{ team.strTeam }}</v-card-title>
-          <v-card-subtitle>{{ team.strCountry }}</v-card-subtitle>
-        </v-card>
+        <TeamCard :team="team" />
       </v-col>
     </v-row>
   </v-container>

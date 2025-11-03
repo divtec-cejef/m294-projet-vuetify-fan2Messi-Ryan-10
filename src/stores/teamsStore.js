@@ -4,7 +4,16 @@ import api from '@/plugins/axios'
 
 // import d'un dictionnaire d'images pour mes équipes
 const customImages = {
-  Arsenal: 'public/logoTeams/Arsenal.png',
+  'Arsenal': '/logoTeams/Arsenal.png',
+  'Aston Villa': '/logoTeams/AstonVilla.png',
+  'Bournemouth': '/logoTeams/Bournemouth.png',
+  'Brentford': '/logoTeams/Brentford.png',
+  'Brighton and Hove Albion': '/logoTeams/Brighton.png',
+  'Burnley': '/logoTeams/Burnley.png',
+  'Chelsea': '/logoTeams/Chelsea.png',
+  'Crystal Palace': '/logoTeams/CrystalPalace.png',
+  'Everton': '/logoTeams/Everton.png',
+  'Fulham': '/logoTeams/Fulham.png',
 }
 
 export const useTeamsStore = defineStore('teams', {
