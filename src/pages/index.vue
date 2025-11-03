@@ -1,17 +1,29 @@
 <template>
   <v-container>
+    <!-- Champ de recherche -->
     <v-text-field
-      v-model="teamName"
+      v-model="search"
+      clearable
       label="Rechercher une équipe"
-      @keyup.enter="searchTeam"
+      prepend-icon="mdi-magnify"
     />
-    <v-btn :loading="loading" @click="searchTeam">Rechercher</v-btn>
 
-    <v-alert v-if="error" class="mt-3" type="error">{{ error }}</v-alert>
+    <!-- Message d’erreur -->
+    <!--<v-alert v-if="error" class="mt-3" type="error">{{ error }}</v-alert>-->
 
-    <v-row v-if="teams.length > 0" class="mt-4">
+    <!-- Message si aucune équipe ne correspond -->
+    <v-alert
+      v-if="!loading && filteredTeams.length === 0 && search.trim() !== ''"
+      class="text-center mt-4"
+      type="warning"
+    >
+      Aucune équipe ne correspond à votre recherche.
+    </v-alert>
+
+    <!-- Grille des équipes -->
+    <v-row v-if="filteredTeams.length > 0" class="mt-4">
       <v-col
-        v-for="team in teams"
+        v-for="team in filteredTeams"
         :key="team.idTeam"
         cols="12"
         md="4"
@@ -31,19 +43,28 @@
   import { computed, onMounted, ref } from 'vue'
   import { useTeamsStore } from '@/stores/teamsStore'
 
+  // Store Pinia
   const store = useTeamsStore()
-  const teamName = ref('Arsenal')
 
+  // Champs de recherche
+  const search = ref('')
+
+  // Accès aux états du store
   const teams = computed(() => store.teams)
   const loading = computed(() => store.loading)
   const error = computed(() => store.error)
 
-  async function searchTeam () {
-    await store.fetchTeams(teamName.value)
-  }
+  // Filtrage dynamique des équipes
+  const filteredTeams = computed(() => {
+    const query = search.value.toLowerCase().trim()
+    if (!query) return teams.value
+    return teams.value.filter(team =>
+      team.strTeam.toLowerCase().includes(query),
+    )
+  })
 
+  // Récupère les équipes au chargement
   onMounted(() => {
-    searchTeam()
+    store.fetchTeams()
   })
 </script>
-*/

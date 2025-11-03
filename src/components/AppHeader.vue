@@ -35,6 +35,10 @@
   const menuItems = [
     { title: 'Accueil', path: '/', icon: 'mdi-home' },
     { title: 'Favoris', path: '/favoris', icon: 'mdi-heart' },
-    { title: 'FAQ', path: '/faq', icon: 'mdi-help-circle' },
   ]
 </script>
+<style scoped>
+.pl-navbar{
+  background-color: #37003C;
+}
+</style>
