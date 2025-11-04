@@ -31,14 +31,9 @@
 </template>
 
 <script setup>
-// Modifier les icons car c'est ceux de pokemon
+// Affiche des icons pour chaques items de notre menu
   const menuItems = [
     { title: 'Accueil', path: '/', icon: 'mdi-home' },
     { title: 'Favoris', path: '/favoris', icon: 'mdi-heart' },
   ]
 </script>
-<style scoped>
-.pl-navbar{
-  background-color: #37003C;
-}
-</style>

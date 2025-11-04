@@ -2,7 +2,7 @@
 import { defineStore } from 'pinia'
 import api from '@/plugins/axios'
 
-// import d'un dictionnaire d'images pour mes équipes
+// Dictionnaire d'images personnalisées
 const customImages = {
   'Arsenal': '/logoTeams/Arsenal.png',
   'Aston Villa': '/logoTeams/AstonVilla.png',
@@ -19,24 +19,52 @@ const customImages = {
 export const useTeamsStore = defineStore('teams', {
   state: () => ({
     teams: [],
+    favorites: [], // tableau des équipes favorites
     loading: false,
     error: null,
   }),
-  actions: {
 
-    async fetchTeams () {
+  actions: {
+    // --- Récupération des équipes depuis l’API ---
+    async fetchTeams() {
       try {
         const response = await api.get('search_all_teams.php?l=English_Premier_League')
-        // Enrichir chaque équipe avec une image personnalisée
         this.teams = response.data.teams.map(team => ({
           ...team,
-          customImage: customImages[team.strTeam] || team.strTeamBadge, // fallback sur logo officiel
+          customImage: customImages[team.strTeam] || team.strTeamBadge, // fallback si image absente
         }))
-        // this.teams = response.data.teams
-        console.log(response.data.teams)
-        console.log(this.teams)
       } catch (error) {
-        return error
+        this.error = error
+      }
+    },
+
+    // --- Gestion des favoris ---
+    toggleFavorite(team) {
+      const exists = this.favorites.find(fav => fav.idTeam === team.idTeam)
+
+      if (exists) {
+        // Si déjà favori → on retire
+        this.favorites = this.favorites.filter(fav => fav.idTeam !== team.idTeam)
+      } else {
+        // Sinon → on ajoute
+        this.favorites.push(team)
+      }
+
+      this.saveFavorites()
+    },
+
+    isFavorite(team) {
+      return this.favorites.some(fav => fav.idTeam === team.idTeam)
+    },
+
+    saveFavorites() {
+      localStorage.setItem('team_favorites', JSON.stringify(this.favorites))
+    },
+
+    loadFavorites() {
+      const saved = localStorage.getItem('team_favorites')
+      if (saved) {
+        this.favorites = JSON.parse(saved)
       }
     },
   },

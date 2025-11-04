@@ -1,48 +1,50 @@
 <template>
-  <v-container>
-    <v-text-field
-      v-model="teamName"
-      label="Rechercher une équipe"
-      @keyup.enter="searchTeam"
+  <v-card class="team-card ma-2" elevation="4">
+    <!-- Image de l'équipe -->
+    <v-img
+      class="team-img"
+      contain
+      height="160"
+      :src="team.customImage"
     />
-    <v-btn :loading="loading" @click="searchTeam">Rechercher</v-btn>
 
-    <v-alert v-if="error" class="mt-3" type="error">{{ error }}</v-alert>
+    <!-- Nom et pays -->
+    <v-card-title class="text-h6 font-weight-bold">
+      {{ team.strTeam }}
+    </v-card-title>
 
-    <v-row v-if="teams.length > 0" class="mt-4">
-      <v-col
-        v-for="team in teams"
-        :key="team.idTeam"
-        cols="12"
-        md="4"
-        sm="6"
-      >
-        <v-card>
-          <v-img height="150" :src="team.strTeamBadge" />
-          <v-card-title>{{ team.strTeam }}</v-card-title>
-          <v-card-subtitle>{{ team.strCountry }}</v-card-subtitle>
-        </v-card>
-      </v-col>
-    </v-row>
-  </v-container>
+    <v-card-subtitle class="text-subtitle-2">
+      {{ team.strTeamShort }}
+    </v-card-subtitle>
+
+    <!-- Stade -->
+    <v-card-text v-if="team.strStadium">
+      <strong>Stadium:</strong> {{ team.strStadium }}
+    </v-card-text>
+  </v-card>
 </template>
 
 <script setup>
-  import { computed, onMounted, ref } from 'vue'
-  import { useTeamsStore } from '@/stores/teamsStore'
-
-  const store = useTeamsStore()
-  const teamName = ref('Arsenal')
-
-  const teams = computed(() => store.teams)
-  const loading = computed(() => store.loading)
-  const error = computed(() => store.error)
-
-  async function searchTeam () {
-    await store.fetchTeams(teamName.value)
-  }
-
-  onMounted(() => {
-    searchTeam()
+  defineProps({
+    team: Object,
   })
 </script>
+
+<style scoped>
+.team-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden; /* Empêche les débordements */
+}
+.team-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Style pour contenir l'image dans la zone du v-card */
+.team-img {
+  object-fit: contain;  /* Contient l'image sans la déformer */
+  width: 100%;         /* S'étend sur toute la largeur de la carte */
+  max-height: 160px;   /* Limite la hauteur */
+  background-color: #f5f5f5; /* Fond gris clair si image non remplie */
+}
+</style>
