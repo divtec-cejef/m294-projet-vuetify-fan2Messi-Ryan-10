@@ -17,7 +17,7 @@
 
     <!-- Nom et pays -->
     <v-card-title class="text-h6 font-weight-bold">{{ team.strTeam }}</v-card-title>
-    <v-card-subtitle>{{ team.strCountry }}</v-card-subtitle>
+    <v-card-subtitle>{{ team.strShort }}</v-card-subtitle>
 
     <!-- Stade -->
     <v-card-text v-if="team.strStadium">

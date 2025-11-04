@@ -1,50 +1,48 @@
 <template>
-  <v-card class="team-card ma-2" elevation="4">
-    <!-- Image de l'équipe -->
-    <v-img
-      class="team-img"
-      contain
-      height="160"
-      :src="team.customImage"
+  <v-container>
+    <v-btn class="mb-4" to="/">← Retour à la liste</v-btn>
+
+    <v-skeleton-loader
+      v-if="loading"
+      type="image, heading, paragraph"
     />
 
-    <!-- Nom et pays -->
-    <v-card-title class="text-h6 font-weight-bold">
-      {{ team.strTeam }}
-    </v-card-title>
+    <div v-else-if="team">
+      <v-card>
+        <v-img contain height="200" :src="team.strLogo" />
+        <v-card-title class="text-h5">{{ team.strTeam }}</v-card-title>
+        <v-card-subtitle>{{ team.strCountry }}</v-card-subtitle>
+        <v-card-text>
+          <p><strong>Stadium:</strong> {{ team.strStadium }}</p>
+          <p><strong>Formed Year:</strong> {{ team.intFormedYear }}</p>
+          <p><strong>Manager:</strong> {{ team.strManager }}</p>
+          <p><strong>Description:</strong> {{ team.strDescriptionEN }}</p>
+        </v-card-text>
+      </v-card>
+    </div>
 
-    <v-card-subtitle class="text-subtitle-2">
-      {{ team.strTeamShort }}
-    </v-card-subtitle>
-
-    <!-- Stade -->
-    <v-card-text v-if="team.strStadium">
-      <strong>Stadium:</strong> {{ team.strStadium }}
-    </v-card-text>
-  </v-card>
+    <v-alert v-else type="error">Équipe non trouvée.</v-alert>
+  </v-container>
 </template>
 
 <script setup>
-  defineProps({
-    team: Object,
+  import { onMounted, ref } from 'vue'
+  import { useRoute } from 'vue-router'
+  import api from '@/plugins/axios'
+
+  const route = useRoute()
+  const team = ref(null)
+  const loading = ref(true)
+
+  onMounted(async () => {
+    const idTeam = route.params.idTeam
+    try {
+      const response = await api.get(`lookupteam.php?id=${idTeam}`)
+      team.value = response.data.teams[0]
+    } catch (error) {
+      console.error(error)
+    } finally {
+      loading.value = false
+    }
   })
 </script>
-
-<style scoped>
-.team-card {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  overflow: hidden; /* Empêche les débordements */
-}
-.team-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-}
-
-/* Style pour contenir l'image dans la zone du v-card */
-.team-img {
-  object-fit: contain;  /* Contient l'image sans la déformer */
-  width: 100%;         /* S'étend sur toute la largeur de la carte */
-  max-height: 160px;   /* Limite la hauteur */
-  background-color: #f5f5f5; /* Fond gris clair si image non remplie */
-}
-</style>
