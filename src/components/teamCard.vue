@@ -5,7 +5,7 @@
       class="position-absolute bottom-0 right-0 mb-2 mr-2"
       icon
       variant="plain"
-      @click.stop="store.toggleFavorite(team)"
+      @click.prevent="store.toggleFavorite(team)"
     >
       <v-icon :color="store.isFavorite(team) ? 'red' : ''">
         {{ store.isFavorite(team) ? 'mdi-heart' : 'mdi-heart-outline' }}
