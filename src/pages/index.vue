@@ -1,4 +1,3 @@
-import TeamCard from '@/components/TeamCard.vue'
 <template>
   <v-container>
     <!-- Champ de recherche -->
@@ -8,9 +7,6 @@ import TeamCard from '@/components/TeamCard.vue'
       label="Rechercher une équipe"
       prepend-icon="mdi-magnify"
     />
-
-    <!-- Message d’erreur -->
-    <!--<v-alert v-if="error" class="mt-3" type="error">{{ error }}</v-alert>-->
 
     <!-- Message si aucune équipe ne correspond -->
     <v-alert
@@ -38,20 +34,16 @@ import TeamCard from '@/components/TeamCard.vue'
 
 <script setup>
   import { computed, onMounted, ref } from 'vue'
+  import TeamCard from '@/components/teamCard.vue'
   import { useTeamsStore } from '@/stores/teamsStore'
 
-  // Store Pinia
   const store = useTeamsStore()
-
-  // Champs de recherche
   const search = ref('')
 
-  // Accès aux états du store
   const teams = computed(() => store.teams)
   const loading = computed(() => store.loading)
   const error = computed(() => store.error)
 
-  // Filtrage dynamique des équipes
   const filteredTeams = computed(() => {
     const query = search.value.toLowerCase().trim()
     if (!query) return teams.value
@@ -60,7 +52,6 @@ import TeamCard from '@/components/TeamCard.vue'
     )
   })
 
-  // Récupère les équipes au chargement
   onMounted(() => {
     store.fetchTeams()
   })
