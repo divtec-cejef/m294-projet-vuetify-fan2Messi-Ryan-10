@@ -1,15 +1,7 @@
 <template>
   <div>
     <v-chip class="ma-1" color="blue" text-color="white">
-      {{ team.strCountry || 'Pays inconnu' }}
-    </v-chip>
-
-    <v-chip class="ma-1" color="green" text-color="white">
-      {{ team.strLeague || 'Ligue inconnue' }}
-    </v-chip>
-
-    <v-chip class="ma-1" color="deep-purple" text-color="white">
-      {{ team.intFormedYear ? `Fondée en ${team.intFormedYear}` : 'Année inconnue' }}
+      {{ team.strTeamShort || 'Aucune abréviation' }}
     </v-chip>
   </div>
 </template>

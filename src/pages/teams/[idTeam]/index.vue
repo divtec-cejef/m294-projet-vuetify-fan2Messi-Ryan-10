@@ -17,15 +17,17 @@
         <!-- Nom de l’équipe -->
         <h1 class="text-h4 mb-2">{{ team.strTeam }}</h1>
 
-        <!-- 🔹 Composant TeamInfo (pays, ligue, année, etc.) -->
+        <!-- Composant TeamInfo -->
         <TeamInfo class="mt-2" :team="team" />
 
         <p class="text-subtitle-1 mb-1"><strong>Stade :</strong> {{ team.strStadium }}</p>
 
-        <!-- Description -->
-        <p class="mt-6 text-body-1">{{ team.strDescriptionEN }}</p>
+        <!-- Description intelligente -->
+        <p class="mt-6 text-body-1">
+          <strong>Description : </strong>{{ teamDescription }}
+        </p>
 
-        <!-- 🔹 Composant TeamStats (victoires, défaites, etc.) -->
+        <!-- Composant TeamStats -->
         <TeamStats v-if="team.stats" class="mt-6" :stats="team.stats" />
 
         <!-- Bouton retour -->
@@ -51,9 +53,10 @@
 </template>
 
 <script setup>
+  import { computed } from 'vue'
   import { useRoute } from 'vue-router'
   import TeamInfo from '@/components/TeamInfo.vue'
-  import TeamStats from '@/components/TeamStats.vue' // ✅ Ajout du composant stats
+  import TeamStats from '@/components/TeamStats.vue'
   import { useTeamsStore } from '@/stores/teamsStore'
 
   const route = useRoute()
@@ -61,4 +64,14 @@
 
   // Recherche de l'équipe par id
   const team = store.teams.find(t => t.idTeam == route.params.idTeam)
+
+  // Description dynamique : FR > EN > message par défaut
+  const teamDescription = computed(() => {
+    if (!team) return 'Aucune équipe trouvée.'
+    return (
+      team.strDescriptionFR
+      || team.strDescriptionEN
+      || 'Aucune description disponible pour cette équipe.'
+    )
+  })
 </script>
