@@ -82,6 +82,7 @@
   })
 
   onMounted(() => {
+    store.loadFavorites()
     store.fetchTeams()
   })
 </script>
