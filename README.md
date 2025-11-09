@@ -5,7 +5,7 @@
 
 ### Concept
 - API choisie et pourquoi  
-- Public cible  
+- Le public cible  
 - Objectifs de l’application  
 
 ### Fonctionnalités principales
