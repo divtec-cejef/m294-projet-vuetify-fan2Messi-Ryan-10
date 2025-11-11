@@ -29,7 +29,6 @@
 
 <script setup>
   import { computed, onMounted } from 'vue'
-  import TeamCard from '@/components/TeamCard.vue'
   import { useTeamsStore } from '@/stores/teamsStore'
 
   const store = useTeamsStore()

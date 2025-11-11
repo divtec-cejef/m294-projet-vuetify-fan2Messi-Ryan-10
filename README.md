@@ -137,6 +137,7 @@ Utilisateur clique / tape → composant utilise store → store met à jour stat
 - Le code généré par l'IA m'a servi de structure que j'ai ensuite compris et adapté chaque partie pour l'intégrer dans mon projet. 
 - J'ai souvent simplifié le code proposé pour qu'il soit plus clair afin que je puisse le comprendre et le réutiliser.
 - Je n'ai pas fait un projet dans la complexité mais un projet que je pouvais comprendre et réexpliquer.
+- j'ai utilisé l'IA pour me simpflifier les tâches comme documenter mes fonctions ou ajouter des commentaires
 
 ### Parties codées manuellement
 - Composants principaux : 70% personnel  
