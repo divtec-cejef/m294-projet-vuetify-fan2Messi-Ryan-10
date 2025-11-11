@@ -11,5 +11,5 @@
 </template>
 
 <script setup>
-  import AppHeader from '@/components/AppHeader.vue'
+import AppHeader from '@/components/AppHeader.vue'
 </script>

@@ -14,7 +14,6 @@ const dynamicRoutes = [
   {
     path: '/team/:idTeam', // Route dynamique avec paramètre idTeam
     name: 'team', // Nom de la route utilisable avec router.push({ name: 'team', params: { idTeam } })
-    component: () => import('@/pages/teamPage.vue'),
   },
 ]
 
