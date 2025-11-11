@@ -37,7 +37,6 @@ _(Capture d’écran de l’application)_
 - [Pinia Docs](https://pinia.vuejs.org/)
 - [Public APIs List](https://github.com/public-apis/public-apis)
 - [Support de cours](https://devjs.ch/)
-- IA ?
 
 #### Progression
 - Semaine 1 : création du projet sur github + réalisation du sitemap du projet
@@ -52,7 +51,7 @@ _(Capture d’écran de l’application)_
 ## 3. 🛠️ Outils et méthodologie
 
 ### Environnement de développement
-- **IDE** : VS Code / WebStorm / Node.js ??????
+- **IDE** : VS Code / WebStorm / Node.js
 - **Versioning** : Git + GitHub
 - **Dépendances principales** : Vue 3, Vuetify 3, Pinia, Axios/Fetch
 - **Gestion API Keys** : `.env` + `.env.example`
@@ -107,8 +106,7 @@ Utilisateur clique / tape → composant utilise store → store met à jour stat
 - Contraste couleurs (Vuetify par défaut)  
 - Labels et placeholders corrects  
 - Navigation clavier possible  
-- Focus visible  
-- ...
+- Focus visible
 
 ### Tests d’erreurs & fallback
 - API down → **mock fallback** affiché (fichier local ou données simulées)  
@@ -129,10 +127,10 @@ Utilisateur clique / tape → composant utilise store → store met à jour stat
 
 ### Utilisation détaillée
 **Domaines d'aide :**
-- Aide au code général : 25%
-- Génération de snippets Vue/Vuetify : 35%  
+- Aide au code général : 50%
+- Génération de snippets Vue/Vuetify : 50%  
 - Aide à la structuration du projet : 15%
-- Debugging : 15%  
+- Debugging : 50%  
 - Recherche d’idées : 0%  
 
 **Compréhension et adaptation**

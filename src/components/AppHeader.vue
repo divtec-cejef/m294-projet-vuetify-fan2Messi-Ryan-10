@@ -5,7 +5,7 @@
       <!-- Logo cliquable -->
       <v-avatar
         class="mr-4 pa-0 cursor-pointer"
-        image="@/assets/logopl.png"
+        image="/public/logoTeams/logopl.png"
         size="48"
         @click="$router.push('/')"
       />
