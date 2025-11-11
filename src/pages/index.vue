@@ -83,6 +83,6 @@
 
   onMounted(() => {
     store.loadFavorites()
-    store.fetchTeams()
+    store.init()
   })
 </script>
